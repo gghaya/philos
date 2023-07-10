@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:17:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 19:23:34 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/10 21:55:19 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,11 @@ void	*thread_routine(void *philo)
 		hendel_print("%lums %d has taken a fork\n", (gettime() - t), ph);
 		pthread_mutex_lock(&ph->next->fork);
 		hendel_print("%lums %d has taken a fork\n", (gettime() - t), ph);
-		if(ph->data->must_eat != -1)
-		{
-			if(ph->nb_eat == ph->data->must_eat)
-			{
-				ph->data->check++;
-			}
-			ph->nb_eat++;
-		}
-		// lock_eat(ph);
 		pthread_mutex_lock(&ph->mutex_meal);
 		ph->lst_meal = gettime() - t;
 		pthread_mutex_unlock(&ph->mutex_meal);
 		hendel_print("%lums %d  is eating\n", (gettime() - t), ph);
+		lock_eat(ph);
 		ft_usleep(ph->data->tm_eat);
 		unlock_forks(ph, t);
 	}
@@ -125,6 +117,7 @@ int	main(int ac, char **av)
 		|| data->must_eat == 0 || data->must_eat < -1)
 	{
 		write(1, "Error\n", 6);
+		free(data);
 		return (0);
 	}
 	ph = fillin_philos(ft_atoi(av[1]), data);

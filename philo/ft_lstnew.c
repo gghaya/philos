@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:07:09 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 18:47:03 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/10 21:50:43 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_philo	*ft_lstnew(t_input *data, int id)
 void	ft_lstclear(t_philo **lst)
 {
 	t_philo	*p;
-	int	nb_philo;
-	int	i;
+	int		nb_philo;
+	int		i;
 
 	nb_philo = (*lst)->data->nb_philo;
 	i = 1;

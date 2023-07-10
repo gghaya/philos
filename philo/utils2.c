@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:50:21 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 18:55:25 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:12:28 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	destroy_philo(t_philo *ph, t_input *data)
 	p = NULL;
 	pthread_mutex_destroy(&ph->data->mutex_eat);
 	pthread_mutex_destroy(&ph->data->print_mutex);
-	pthread_mutex_destroy(&ph->data->print_mutex);
+	pthread_mutex_destroy(&ph->data->mutex_eat);
 	free(data);
 	ft_lstclear(&ph);
 	return ;

@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:01:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 18:54:51 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:11:54 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_input
 	int				loop;
 	time_t			init_tm;
 	pthread_mutex_t	mutex_eat;
-	pthread_mutex_t	mutex_loop;
 	pthread_mutex_t	print_mutex;
 	int				exit;
 	int				i;

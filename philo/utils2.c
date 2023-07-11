@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:50:21 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 22:12:28 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/11 11:24:47 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_input	*fill(t_input *dt, int ac, char **av)
 {
 	dt->exit = check(ac, av);
 	if (dt->exit == -1)
-		return (NULL);
+		return (free(dt), NULL);
 	dt->nb_philo = ft_atoi(av[1]);
 	dt->tm_die = ft_atoi(av[2]);
 	dt->tm_eat = ft_atoi(av[3]);

@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 20:53:44 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/09 19:23:18 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 00:17:47 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_erreur(long int n, int sign)
 {
 	if (n * sign < -2147483646 || n * sign > 2147483647)
 	{
-		write(1, "Error\n", 6);
 		return (-1);
 	}
 	return (n * sign);

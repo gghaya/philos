@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:01:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 22:11:54 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/12 19:08:12 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_input
 	time_t			init_tm;
 	pthread_mutex_t	mutex_eat;
 	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	check_mutex;
+	pthread_mutex_t	mutex1;
+	pthread_mutex_t	mutex2;
 	int				exit;
 	int				i;
 	int				j;
@@ -62,7 +65,6 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new);
 t_philo	*create_philo(t_philo *ph);
 void	*thread_routine(void *ph);
 time_t	gettime(void);
-void	check_death(t_philo *ph, time_t start);
 void	ft_usleep(int tm);
 void	hendel_print(char *s, time_t t, t_philo *ph);
 int		nbr_eat(t_philo *p);
@@ -72,5 +74,5 @@ void	unlock_forks(t_philo *ph, time_t t);
 t_input	*fill(t_input *dt, int ac, char **av);
 int		fct(t_philo *ph, time_t t);
 void	ft_lstclear(t_philo **lst);
-
+void	check_death(t_philo *ph);
 #endif

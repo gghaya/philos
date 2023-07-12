@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:07:09 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 21:50:43 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/12 17:45:36 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_philo	*ft_lstnew(t_input *data, int id)
 	list->id = id;
 	list->data = data;
 	list->nb_eat = 0;
+	list->lst_meal = 0;
 	list->next = NULL;
 	pthread_mutex_init(&list->fork, NULL);
 	pthread_mutex_init(&list->mutex_meal, NULL);

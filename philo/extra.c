@@ -6,11 +6,12 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 11:47:10 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/10 21:46:35 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 00:06:53 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"philo.h"
+
 
 time_t	gettime(void)
 {
@@ -35,25 +36,57 @@ int	nbr_eat(t_philo *p)
 	return (1);
 }
 
-void	check_death(t_philo *ph, time_t start)
+void	check_death(t_philo *ph)
 {
 	time_t	t;
+	int		i;
 
+	i = 1;
 	t = ph->data->init_tm;
-	while (1)
+	while (ph->data->loop)
 	{
-		pthread_mutex_lock(&ph->data->mutex_eat);
-		if (nbr_eat(ph) == 1 && ph->data->must_eat != -1)
+		usleep(100);
+		// pthread_mutex_lock(&ph->data->check_mutex);
+		if (ph->data->must_eat != -1)
 		{
-			pthread_mutex_lock(&ph->data->print_mutex);
-			return ;
+			// while (i <= ph->data->nb_philo)
+			// {
+				// if (ph->nb_eat < ph->data->must_eat)
+				// 	ph = ph->next;
+
+				if(ph->data->check == ph->data->nb_philo)
+				{
+				// printf("%d  ********* %d\n",ph->id,ph->nb_eat);
+					pthread_mutex_lock(&ph->data->mutex1);
+					ph->data->loop = 0;
+					pthread_mutex_unlock(&ph->data->mutex1);
+					pthread_mutex_lock(&ph->data->print_mutex);
+					return;
+				}
+				// i++;
+			// }
+
+
+
+			// i = 1;
 		}
-		else if (fct(ph, gettime() - start) == 0)
-			return ;
-		ph = ph->next;
-		pthread_mutex_unlock(&ph->mutex_meal);
+		else
+		{
+			pthread_mutex_lock(&ph->data->mutex2);
+			// printf("##########%d#########\n",ph->data->loop);
+			if (gettime() - ph->lst_meal > ph->data->tm_die)
+			{
+				pthread_mutex_unlock(&ph->data->mutex2);
+				pthread_mutex_lock(&ph->data->print_mutex);
+				printf("%lu %d died\n", gettime() - t, ph->id);
+				pthread_mutex_lock(&ph->data->mutex1);
+				ph->data->loop = 0;
+				pthread_mutex_unlock(&ph->data->mutex1);
+			}
+			pthread_mutex_unlock(&ph->data->mutex2);
+		}
+		// pthread_mutex_unlock(&ph->data->check_mutex);
 	}
-	return ;
 }
 
 int	fct(t_philo *ph, time_t t)

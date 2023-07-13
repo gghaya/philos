@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:58:55 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/05 18:31:40 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:34:59 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,30 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 	}
 	tmp->next = new;
 	new->next = NULL;
+}
+
+void	ft_died1(t_philo	*ph)
+{
+	pthread_mutex_lock(&ph->data->mutex2);
+	ph->data->loop = 0;
+	pthread_mutex_unlock(&ph->data->mutex2);
+	// pthread_mutex_lock(&ph->data->print_mutex);
+	return ;
+}
+
+void	ft_died2(t_philo	*ph, time_t t)
+{
+	// pthread_mutex_lock(&ph->data->mutex2);
+	pthread_mutex_lock(&ph->mutex_meal);
+	if (gettime() - ph->lst_meal > ph->data->tm_die)
+	{
+		pthread_mutex_lock(&ph->data->print_mutex);
+		printf("%lu %d died\n", gettime() - t, ph->id);
+		pthread_mutex_lock(&ph->data->mutex2);
+		ph->data->loop = 0;
+		pthread_mutex_unlock(&ph->data->mutex2);
+	}
+	pthread_mutex_unlock(&ph->mutex_meal);
+	// pthread_mutex_unlock(&ph->data->mutex2);
+	return ;
 }

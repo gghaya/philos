@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:01:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/12 19:08:12 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:47:30 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,15 @@ typedef struct s_input
 	int				tm_sleep;
 	int				must_eat;
 	int				check;
-	int				loop;
 	time_t			init_tm;
 	pthread_mutex_t	mutex_eat;
 	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	check_mutex;
 	pthread_mutex_t	mutex1;
 	pthread_mutex_t	mutex2;
+	pthread_mutex_t	mutex3;
 	int				exit;
+	int				loop;
 	int				i;
 	int				j;
 }				t_input;
@@ -75,4 +76,8 @@ t_input	*fill(t_input *dt, int ac, char **av);
 int		fct(t_philo *ph, time_t t);
 void	ft_lstclear(t_philo **lst);
 void	check_death(t_philo *ph);
+void	ft_eat(t_philo	*ph, time_t	t);
+void	ft_sleep(t_philo	*ph, time_t	t);
+void	ft_died2(t_philo	*ph, time_t t);
+void	ft_died1(t_philo	*ph);
 #endif

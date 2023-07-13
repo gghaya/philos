@@ -6,13 +6,13 @@
 #    By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/25 14:12:43 by gghaya            #+#    #+#              #
-#    Updated: 2023/07/12 22:58:17 by gghaya           ###   ########.fr        #
+#    Updated: 2023/07/13 13:50:25 by gghaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-FLAGS =  -Wall -Werror -Wextra -pthread #-fsanitize=thread -g
+FLAGS =  -Wall -Werror -Wextra -pthread -fsanitize=thread -g
 CFILES = ft_atoi.c main.c ft_lstadd_back.c ft_lstnew.c \
 		utils.c extra.c utils2.c
 

@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 12:50:21 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/12 22:52:38 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 14:11:09 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ t_input	*fill(t_input *dt, int ac, char **av)
 	dt->check = 0;
 	pthread_mutex_init(&dt->print_mutex, NULL);
 	pthread_mutex_init(&dt->mutex_eat, NULL);
-	pthread_mutex_init(&dt->mutex1, NULL);
+	pthread_mutex_init(&dt->check_mutex, NULL);
+	// pthread_mutex_init(&dt->mutex1, NULL);
 	pthread_mutex_init(&dt->mutex2, NULL);
+	pthread_mutex_init(&dt->mutex3, NULL);
 	return (dt);
 }

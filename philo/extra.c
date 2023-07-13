@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 11:47:10 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/13 14:37:02 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 18:14:08 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,11 @@ void	check_death(t_philo *ph)
 	time_t	t;
 
 	t = ph->data->init_tm;
-	pthread_mutex_lock(&ph->data->mutex2);
-	while (ph->data->loop)
+	// pthread_mutex_lock(&ph->data->mutex2);
+	while (1)
 	{
-		pthread_mutex_unlock(&ph->data->mutex2);
+		// pthread_mutex_unlock(&ph->data->mutex2);
+	// printf("hello %d\n", ph->data->loop);
 
 		usleep(100);
 		pthread_mutex_lock(&ph->data->check_mutex);
@@ -39,9 +40,13 @@ void	check_death(t_philo *ph)
 			return (ft_died1(ph));
 		}
 		else
-			ft_died2(ph, t);
+		{
+			if(ft_died2(ph, t))
+				break;
+
+		}
 		pthread_mutex_unlock(&ph->data->check_mutex);
-		// pthread_mutex_unlock(&ph->data->mutex3);
+		// pthread_mutex_lock(&ph->data->mutex2);
 	}
-	// pthread_mutex_unlock(&ph->data->mutex1);
+	// pthread_mutex_unlock(&ph->data->mutex2);
 }

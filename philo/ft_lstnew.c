@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:07:09 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/13 14:31:18 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 17:56:44 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,33 @@ void	ft_lstclear(t_philo **lst)
 
 void	ft_eat(t_philo	*ph, time_t t)
 {
-	// pthread_mutex_lock(&ph->data->mutex1);
-	if (ph->data->loop == 1)
+	pthread_mutex_lock(&ph->data->mutex2);
+
+		if (ph->data->loop == 1)
 	{
-	// pthread_mutex_unlock(&ph->data->mutex1);
+	pthread_mutex_unlock(&ph->data->mutex2);
+
 		pthread_mutex_lock(&ph->fork);
 		pthread_mutex_lock(&ph->data->print_mutex);
 		printf("%lu %d has taken a fork\n", gettime() - t, ph->id);
 		pthread_mutex_unlock(&ph->data->print_mutex);
+	pthread_mutex_lock(&ph->data->mutex2);
+
 	}
-	// pthread_mutex_lock(&ph->data->mutex1);
+	pthread_mutex_unlock(&ph->data->mutex2);
+	pthread_mutex_lock(&ph->data->mutex2);
 	if (ph->data->loop == 1)
 	{
+	pthread_mutex_unlock(&ph->data->mutex2);
+
 		pthread_mutex_lock(&ph->next->fork);
 		pthread_mutex_lock(&ph->data->print_mutex);
 		printf("%lu %d has taken a fork\n", gettime() - t, ph->id);
 		pthread_mutex_unlock(&ph->data->print_mutex);
+	pthread_mutex_lock(&ph->data->mutex2);
+		
 	}
-	// pthread_mutex_unlock(&ph->data->mutex1);
+	pthread_mutex_unlock(&ph->data->mutex2);
 	pthread_mutex_lock(&ph->data->print_mutex);
 	printf("%lu %d is eating\n", gettime() - t, ph->id);
 	pthread_mutex_unlock(&ph->data->print_mutex);

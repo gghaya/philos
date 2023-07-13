@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 23:58:55 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/13 14:34:59 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/13 18:13:03 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_died1(t_philo	*ph)
 	return ;
 }
 
-void	ft_died2(t_philo	*ph, time_t t)
+int	ft_died2(t_philo	*ph, time_t t)
 {
 	// pthread_mutex_lock(&ph->data->mutex2);
 	pthread_mutex_lock(&ph->mutex_meal);
@@ -48,11 +48,14 @@ void	ft_died2(t_philo	*ph, time_t t)
 	{
 		pthread_mutex_lock(&ph->data->print_mutex);
 		printf("%lu %d died\n", gettime() - t, ph->id);
+		pthread_mutex_unlock(&ph->data->mutex2);
 		pthread_mutex_lock(&ph->data->mutex2);
 		ph->data->loop = 0;
+		return (1);
 		pthread_mutex_unlock(&ph->data->mutex2);
+	pthread_mutex_unlock(&ph->mutex_meal);
 	}
 	pthread_mutex_unlock(&ph->mutex_meal);
 	// pthread_mutex_unlock(&ph->data->mutex2);
-	return ;
+	return (0);
 }

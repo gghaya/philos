@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 11:44:41 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/12 14:45:03 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/14 07:53:54 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ t_input	*fillin_struct(int ac, char **av)
 	if (dt->nb_philo > 200 || dt->tm_die < 60
 		|| dt->tm_eat < 60 || dt->tm_sleep < 60)
 			dt->i = write_error();
-	if (dt->nb_philo == 0 || dt->tm_die == 0
-		|| dt->tm_eat == 0 || dt->tm_sleep == 0)
-			dt->j = write_error();
 	return (dt);
 }
 
@@ -72,9 +69,10 @@ void	ft_usleep(int tm)
 		usleep(100);
 }
 
-void	hendel_print(char *s, time_t t, t_philo *ph)
+void	eat_print(t_philo *ph, time_t t)
 {
 	pthread_mutex_lock(&ph->data->print_mutex);
-	printf(s, t, ph->id);
+	printf("%lu %d is eating\n", gettime() - t, ph->id);
 	pthread_mutex_unlock(&ph->data->print_mutex);
+	return ;
 }

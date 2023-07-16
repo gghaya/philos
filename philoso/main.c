@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 14:17:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/13 18:00:51 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/14 10:12:50 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	*thread_routine(void *philo)
 {
 	time_t	t;
 	t_philo	*ph;
+
 	ph = (t_philo *)philo;
 	t = ph->data->init_tm;
 	pthread_mutex_lock(&ph->mutex_meal);
@@ -100,19 +101,18 @@ int	main(int ac, char **av)
 	if (!data)
 	{
 		write(1, "Error\n", 6);
-		free(data);
-		return (0);
+		return (free(data), 0);
 	}
 	if (data->exit == -1 || data->i == -1 || data->j == -1
-		|| data->must_eat == 0 || data->must_eat < -1)
+		|| data->must_eat < -1)
 	{
 		write(1, "Error\n", 6);
-		free(data);
-		return (0);
+		return (free(data), 0);
 	}
+	if (data->must_eat == 0 || data->nb_philo == 0)
+		return (free(data), 0);
 	ph = fillin_philos(ft_atoi(av[1]), data);
 	ph = create_philo(ph);
-	// exit(0);
 	check_death(ph);
 	destroy_philo(ph, data);
 	return (0);

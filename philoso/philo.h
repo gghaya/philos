@@ -6,7 +6,7 @@
 /*   By: gghaya <gghaya@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 20:01:38 by gghaya            #+#    #+#             */
-/*   Updated: 2023/07/13 18:13:58 by gghaya           ###   ########.fr       */
+/*   Updated: 2023/07/14 11:12:43 by gghaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int		ft_erreur(long int n, int sign);
 int		check(int c, char **v);
 int		ft_isdigit(char *s);
 t_input	*fillin_struct(int ac, char **av);
-void	print_struct(t_philo *ph);
 t_philo	*fillin_philos(int nbr, t_input *data);
 t_philo	*ft_lstnew(t_input *data, int id);
 void	ft_lstadd_back(t_philo **lst, t_philo *new);
@@ -65,17 +64,13 @@ t_philo	*create_philo(t_philo *ph);
 void	*thread_routine(void *ph);
 time_t	gettime(void);
 void	ft_usleep(int tm);
-void	hendel_print(char *s, time_t t, t_philo *ph);
-int		nbr_eat(t_philo *p);
 void	destroy_philo(t_philo *ph, t_input *data);
-void	lock_eat(t_philo *ph);
-void	unlock_forks(t_philo *ph, time_t t);
 t_input	*fill(t_input *dt, int ac, char **av);
-int		fct(t_philo *ph, time_t t);
 void	ft_lstclear(t_philo **lst);
 void	check_death(t_philo *ph);
 void	ft_eat(t_philo	*ph, time_t	t);
 void	ft_sleep(t_philo	*ph, time_t	t);
-int	ft_died2(t_philo	*ph, time_t t);
-void	ft_died1(t_philo	*ph);
+int		died_time(t_philo	*ph, time_t t);
+void	died_eat(t_philo	*ph);
+void	eat_print(t_philo *ph, time_t t);
 #endif
